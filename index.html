@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Verification</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      body {
+    background-color:  #fe3e39;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Prevents scrolling */
+    position: relative; /* Ensures positioning context for absolute elements */
+}
+
+.container {
+    position: relative; /* Stays in front of the canvas */
+    z-index: 1; /* Places it above the canvas */
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 300px;
+    border: 4px solid rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+h1 {
+    font-size: 26px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: whitesmoke;
+    border: 2px solid black;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.0);
+}
+
+input::placeholder {
+  color: white;
+}
+
+.verify-button, .get-key-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #fe3e39;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.verify-button:hover, .get-key-button:hover {
+    background-color: #fe3e39;
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 16px;
+    color: red;
+}
+
+.loading-animation {
+    width: 40px;
+    height: 40px;
+    border: 5px solid rgba(255, 255, 255, 0.9);
+    border-top: 5px solid #fe3e39;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    left: 41%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* In front of the container */
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Behind all other elements */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+    </style>
+</head>
+<body>
+    <!-- The particle canvas is positioned as the background -->
+    <canvas id="particleCanvas"></canvas>
+   
+    <div class="container">
+        <h1>Welcome to Tonny Hack 2.0</h1>
+        <h3><p id="random-number">Your Access number is: </p></h3>
+        <input type="text" id="user-key" placeholder="Enter your key" class="input-field">
+        <button onclick="verifyKey()" class="verify-button">Verify Key</button>
+        <div id="loading" class="loading-animation" style="display:none;"></div>
+        <p id="message" class="message"></p>
+        <!-- Get Your Key Button -->
+        <a href="https://t.me/Tonyhack2_bot" target="_blank" class="get-key-button">Get Your Key</a>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="nn.js"></script>
+    <script>
+      // script.js
+
+// Function to get random number and save it in local storage
+window.onload = function() {
+    let randomNumber = localStorage.getItem('randomNumber');
+    if (!randomNumber) {
+        randomNumber = Math.floor(Math.random() * 41); // Generate random number between 0 to 20
+        localStorage.setItem('randomNumber', randomNumber);
+    }
+    document.getElementById('random-number').innerText = "Your Access number is: " + randomNumber;
+};
+
+// Function to verify the key entered by the user
+function verifyKey() {
+    const randomNumber = localStorage.getItem('randomNumber');
+    const userKey = document.getElementById('user-key').value;
+    const correctKey = getKeyForNumber(randomNumber); // Function to get the correct key for the number
+    const loadingElement = document.getElementById('loading');
+    const messageElement = document.getElementById('message');
+
+    // Show loading animation
+    loadingElement.style.display = 'block';
+    messageElement.innerText = '';
+    
+    setTimeout(() => {
+        loadingElement.style.display = 'none'; // Hide loading animation
+
+        // Verify the entered key
+        if (userKey === correctKey) {
+            messageElement.style.color = 'lightGreen';
+            messageElement.innerText = 'Key Verified Successfully!';
+            setTimeout(() => {
+                window.location.href = 'main.html'; // Redirect to main.html after key verification
+            }, 1000); // Wait 1 second before redirecting
+        } else {
+            messageElement.style.color = 'red';
+            messageElement.innerText = 'Incorrect Key. Please try again.';
+        }
+    }, 1500); // Simulate loading delay of 1.5 seconds
+}
+
+// Function to generate the correct key for a given random number
+function getKeyForNumber(number) {
+    const keys = {
+     0: "B1c2D3e4F5g6H7i8",
+    1: "J9k8L7m6N5o4P3q2",
+    2: "R3s4T5u6V7w8X9y0",
+    3: "Z7a6B5c4D3e2F1g0",
+    4: "G2h3I4j5K6l7M8n9",
+    5: "O1p2Q3r4S5t6U7v8",
+    6: "Y3z4A5b6C7d8E9f0",
+    7: "I9k8L7m0N1o2P3q4",
+    8: "Q5r4S3t2U1v0W9x8",
+    9: "C0d9E8f7G6h5I4j3",
+    10: "U3c2B1d0F9g8H7i6",
+    11: "S9e8Z7f6G5h4I3j2",
+    12: "N2o3P4q5R6s7T8u9",
+    13: "D8w9X0y1Z2a3B4c5",
+    14: "F5u4V3w2X1y0Z9a8",
+    15: "K5l6M7n8O9p0Q1r2",
+    16: "W9o8N7p6Q5r4S3t2",
+    17: "M3v2U1w0X9y8Z7a6",
+    18: "L1m2K3n4O5p6Q7r8",
+    19: "R9s8T7u6V5w4X3y2",
+    20: "E0b1C2d3F4g5H6i7",
+    21: "A2b3C4d5E6f7G8h9",
+    22: "H1i2J3k4L5m6N7o8",
+    23: "P9q8R7s6T5u4V3w2",
+    24: "X0y1Z2a3B4c5D6e7",
+    25: "F9g8H7i6J5k4L3m2",
+    26: "T8u7V6w5X4y3Z2a1",
+    27: "R5s4T3u2V1w0X9y8",
+    28: "K6l5M4n3O2p1Q0r9",
+    29: "E8f7G6h5I4j3K2l1",
+    30: "D1e2F3g4H5i6J7k8",
+    31: "M8n9O0p1Q2r3S4t5",
+    32: "Z3a2B1c0D9e8F7g6",
+    33: "Y5z4A3b2C1d0E9f8",
+    34: "N4o5P6q7R8s9T0u1",
+    35: "Q8r7S6t5U4v3W2x1",
+    36: "C2d1E0f9G8h7I6j5",
+    37: "V7w6X5y4Z3a2B1c0",
+    38: "H3i4J5k6L7m8N9o0",
+    39: "T6u5V4w3X2y1Z0a9",
+    40: "B0c1D2e3F4g5H6i7",
+    41: "L8m7N6o5P4q3R2s1"
+    };
+    return keys[number];
+}
+    </script>
+</body>
+</html>

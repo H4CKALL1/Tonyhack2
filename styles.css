@@ -1,0 +1,161 @@
+/* General styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #242424 0%, #fe3e39 100%);
+  overflow: hidden;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Behind the content */
+}
+
+.container {
+  display: flex;
+  flex-direction: column; /* Stacks elements vertically */
+  align-items: center; /* Centers items horizontally */
+  justify-content: center;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.0); /* Black transparent background */
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.0); /* Black shadow */
+  backdrop-filter: blur(0px);
+  animation: fadeIn 1.5s ease;
+}
+
+/* Animation keyframes */
+@keyframes rgb-border-glow {
+  0% {
+    border-color: black;
+    box-shadow: 0 0 30px black;
+  }
+  33% {
+    border-color: black;
+    box-shadow: 0 0 60px black;
+  }
+  66% {
+    border-color: black;
+    box-shadow: 0 0 30px ;
+  }
+  100% {
+    border-color: red;
+    box-shadow: 0 0 15px black;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Profile Picture Animation */
+.profile-pic-wrapper {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 5s linear infinite, rgb-border-glow 10s linear infinite;
+  border: 5px solid;
+  margin: 20px auto; /* Center horizontally */
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Other Styles */
+.info h2 {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 2px solid black;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  color: white;
+  width: 200px;
+  margin: 2px;
+  text-decoration: none; /* Remove underline from links */
+  background-color: rgba(0, 0, 0, 0.4); /* Black transparent button */
+}
+
+.btn:hover {
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Button Specific Styles */
+.instagram-btn {
+  background-color: rgba(0, 0, 0, 0.4); /* Black transparent */
+}
+
+.telegram-btn {
+  background-color: rgba(0, 0, 0, 0.4); /* Black transparent */
+}
+
+.register-btn {
+  background-color: rgba(0, 0, 0, 0.4); /* Black transparent */
+}
+
+.goagame-btn {
+  background-color: rgba(0, 0, 0, 0.4); /* Black transparent */
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 20px;
+  }
